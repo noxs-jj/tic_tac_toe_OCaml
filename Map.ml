@@ -73,31 +73,39 @@ let rec print_map map = match map with
 	| [] -> print_string ""
 	| h1::[] ->
 	begin
-		let rec loop elem = match elem with
+		let rec loop elem line = match elem with
 			| [] -> print_string ""
 			| e1::[]-> Case.print_case e1
 			| e1::e2::tail ->
 			begin
 			 	Case.print_case e1;
-			 	print_string " | ";
-			 	loop (e2::tail)
+			 	print_string " |";
+			 	if line = 2 then 
+			 	loop (e2::tail) line
 			 end
 		in
-		loop h1;
+		loop h1 0;
+		loop h1 1;
+		loop h1 2;
 	end
 	| h1::h2::tail ->
 	begin
-		let rec loop elem = match elem with
+		let rec loop elem line = match elem with
 			| [] -> print_string ""
 			| e1::[]-> Case.print_case e1
 			| e1::e2::tail ->
 			begin
 			 	Case.print_case e1;
-			 	print_string " | ";
-			 	loop (e2::tail)
+			 	print_string " |";
+			 	if line = 2 then 
+			 	loop (e2::tail) line
 			 end
 		in
-		loop h1;
-		print_endline "---------------------"
+		loop h1 0;
+		loop h1 1;
+		loop h1 2;
+		print_endline "---------------------";
 		print_map (h2::tail)
 	end
+
+
