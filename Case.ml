@@ -14,7 +14,6 @@
 	
 	type t = string * string * string * string
 
-
 	let newCase = (" - - -", " - - -", " - - -", "0")
 
 	let whatPlayerFromInt player =
@@ -26,14 +25,15 @@
 		if charCheck = 'X' then '1'
 		else if charCheck = 'O' then '2'
 		else '0'
-
+(* Case.putchar ((get_x coord) mod 3) ((get_y coord) mod 3) case '1'; *)
 	let putchar (x:int) (y:int) (case:t) (player:char) = 
 		let char_to_case = whatPlayerFromInt player in
 		match case with
-			| (line0, line1, line2, status) -> begin
-				if y = 0 then String.set line0 (x * 2 + 1) char_to_case
-				else if y = 1 then String.set line1 (x * 2 + 1) char_to_case
-				else if y = 2 then String.set line2 (x * 2 + 1) char_to_case
+			| (line0, line1, line2, status) ->
+			begin
+				if y = 0 then begin print_endline " hello "; String.set line0 (x * 2 + 1) char_to_case end
+				else if y = 1 then begin print_endline " hello11 " ;String.set line1 (x * 2 + 1) char_to_case end
+				else if y = 2 then begin print_endline " hello22 " ;String.set line2 (x * 2 + 1) char_to_case end
 				else invalid_arg "Case::putchar case wrong y"
 			end
 

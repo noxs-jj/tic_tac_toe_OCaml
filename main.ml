@@ -25,8 +25,8 @@ let string_to_coord data =
 	else (((int_of_char(data.[0])) - 48), ((int_of_char(data.[2])) - 48))
 
 let parse ((a, b):z) =
-	if a < 0 || a > 2 then false
-	else if b < 0 || b > 2 then false
+	if a < 0 || a > 8 then false
+	else if b < 0 || b > 8 then false
 	else true
 
 let rec read_loop () =
