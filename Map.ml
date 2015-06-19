@@ -11,9 +11,9 @@
 (********************************************************************************)
 
 include Case
-
-type t_line = [Case.t] 
-type t_map = [t_line]
+(* 
+type t_line = [Case.t]
+type t_map = [t_line] *)
 
 let rec getcase x y map = match map with
 	| [] -> invalid_arg "Error y (getcase)"
@@ -32,7 +32,11 @@ let rec getcase x y map = match map with
 		end
 	end
 
-let rec init map = match map with
+let createMap = 
+	let lst = [Case.newCase ; Case.newCase ; Case.newCase] in
+	[lst ; lst ; lst]
+
+(* let rec init map = match map with
 	| [] -> print_string ""
 	| h1::tail -> begin
 		let rec loop elem = match elem with
@@ -41,9 +45,9 @@ let rec init map = match map with
 		in
 		loop h1;
 		init tail
-	end
+	end *)
 
-let get_Case_status (_, _, _, d) = d
+let get_Case_status (a, b, c, d) = d
 
 let do_check x y z =
 	if x = y && x = z then true
@@ -69,43 +73,46 @@ let check map =
 	else if (do_check c3 c5 c9) = true then c1
 	else 0
 
-let rec print_map map = match map with
+let rec print_map1 map = match map with
 	| [] -> print_string ""
 	| h1::[] ->
 	begin
 		let rec loop elem line = match elem with
 			| [] -> print_string ""
-			| e1::[]-> Case.print_case e1
-			| e1::e2::tail ->
+			| e1::[]-> Case.line_print e1 line
+			| e1::tail ->
 			begin
-			 	Case.print_case e1;
+			 	Case.line_print e1 line;
 			 	print_string " |";
-			 	if line = 2 then 
-			 	loop (e2::tail) line
+			 	loop tail line
 			 end
 		in
 		loop h1 0;
+		print_char '\n';
 		loop h1 1;
+		print_char '\n';
 		loop h1 2;
 	end
-	| h1::h2::tail ->
+	| h1::tail ->
 	begin
 		let rec loop elem line = match elem with
 			| [] -> print_string ""
-			| e1::[]-> Case.print_case e1
-			| e1::e2::tail ->
+			| e1::[]-> Case.line_print e1 line
+			| e1::tail ->
 			begin
-			 	Case.print_case e1;
+			 	Case.line_print e1 line;
 			 	print_string " |";
-			 	if line = 2 then 
-			 	loop (e2::tail) line
+			 	loop tail line
 			 end
 		in
 		loop h1 0;
+		print_char '\n';
 		loop h1 1;
+		print_char '\n';
 		loop h1 2;
-		print_endline "---------------------";
-		print_map (h2::tail)
+		print_char '\n';
+		print_endline "----------------------";
+		print_map1 tail
 	end
 
 

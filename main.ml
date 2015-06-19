@@ -11,7 +11,9 @@
 (********************************************************************************)
 
 let main () =
-	Map.init
+	let play = Map.createMap in
+	ignore(Map.print_map1 play);
+	print_char '\n'
 
 
 let () = main ()

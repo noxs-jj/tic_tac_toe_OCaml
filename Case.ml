@@ -82,11 +82,11 @@ struct
 				else status.[0] <- '0'
 		end
 
-	let line_print case y = match case with
+	let line_print (case:t) y = match case with
 		| (line0, line1, line2, status) -> begin
-			if y = 0 then line0
-			else if y = 1 then line1
-			else if y = 2 then line2
+			if y = 0 then print_string line0
+			else if y = 1 then print_string line1
+			else if y = 2 then print_string line2
 			else invalid_arg "Case::line_print y wrong argument"
 		end
 end
