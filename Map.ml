@@ -10,13 +10,11 @@
 (*                                                                              *)
 (********************************************************************************)
 
-include Case
-
 (* 
 type t_line = [Case.t]
 type t_map = [t_line] *)
 
-let rec getcase x y map = match map with
+let rec getcase (x:int) (y:int) map = match map with
 	| [] -> invalid_arg "Error y (getcase)"
 	| h1::tail -> begin
 		if y > 0 then getcase x (y - 1) tail

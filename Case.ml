@@ -10,10 +10,10 @@
 (*                                                                              *)
 (********************************************************************************)
 
-module Case =
-struct
+
 	
 	type t = string * string * string * string
+
 
 	let newCase = (" - - -", " - - -", " - - -", "0")
 
@@ -89,4 +89,4 @@ struct
 			else if y = 2 then print_string line2
 			else invalid_arg "Case::line_print y wrong argument"
 		end
-end
+

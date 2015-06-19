@@ -12,8 +12,8 @@
 
 type z = int * int
 
-let get_x (a, b) = a
-let get_y (a, b) = b
+let get_x ((a, b):z) = a
+let get_y ((a, b):z) = b
 
 let isInt charCheck =
 	if charCheck >= '0' && charCheck <= '9' then true
@@ -37,16 +37,14 @@ let rec read_loop () =
 	print_int (get_y test);
 	print_char '\n'; *)
 	if parse test = false then read_loop ()
-	else print_endline "yes"
+	else string_to_coord line
 	(* if (parse (string_to_coord line)) = false then read_loop
 	else string_to_coord line *)
 
-let rec run play status =
-	(* let coord = read_loop in *)
-	(* let case = Map.getcase ((get_x coord) / 3) ((get_y coord) / 3) in *)
-	(* Map.Case.putchar ((get_x coord) mod 3) ((get_y coord) mod 3) case '1' *)
-	Map.Case.putchar 1 1 Map.Case.newCase '1';
-	(* Map.Case.putchar 1 1 case '1' *)
+let run play status =
+	let coord = read_loop () in
+	let case = Map.getcase ((get_x coord) / 3) ((get_y coord) / 3) play in
+	Case.putchar ((get_x coord) mod 3) ((get_y coord) mod 3) case '1';
 	ignore(Map.print_map1 play);
 	print_char '\n'
 	(* if status = true then run play status;  *)
