@@ -18,8 +18,8 @@ struct
 	let newCase = (" - - -", " - - -", " - - -", "0")
 
 	let whatPlayerFromInt player =
-		if player = 1 then 'X'
-		else if player = 2 then 'O'
+		if player = '1' then 'X'
+		else if player = '2' then 'O'
 		else '-'
 
 	let whatPlayerFromChar charCheck =
@@ -27,7 +27,7 @@ struct
 		else if charCheck = 'O' then '2'
 		else '0'
 
-	let putchar x y case player = 
+	let putchar (x:int) (y:int) (case:t) (player:char) = 
 		let char_to_case = whatPlayerFromInt player in
 		match case with
 			| (line0, line1, line2, status) -> begin

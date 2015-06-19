@@ -11,6 +11,7 @@
 (********************************************************************************)
 
 include Case
+
 (* 
 type t_line = [Case.t]
 type t_map = [t_line] *)
@@ -111,7 +112,7 @@ let rec print_map1 map = match map with
 		print_char '\n';
 		loop h1 2;
 		print_char '\n';
-		print_endline "----------------------";
+		print_endline "-----------------------";
 		print_map1 tail
 	end
 
