@@ -68,3 +68,36 @@ let check map =
 	else if (do_check c1 c5 c9) = true then c1
 	else if (do_check c3 c5 c9) = true then c1
 	else 0
+
+let rec print_map map = match map with
+	| [] -> print_string ""
+	| h1::[] ->
+	begin
+		let rec loop elem = match elem with
+			| [] -> print_string ""
+			| e1::[]-> Case.print_case e1
+			| e1::e2::tail ->
+			begin
+			 	Case.print_case e1;
+			 	print_string " | ";
+			 	loop (e2::tail)
+			 end
+		in
+		loop h1;
+	end
+	| h1::h2::tail ->
+	begin
+		let rec loop elem = match elem with
+			| [] -> print_string ""
+			| e1::[]-> Case.print_case e1
+			| e1::e2::tail ->
+			begin
+			 	Case.print_case e1;
+			 	print_string " | ";
+			 	loop (e2::tail)
+			 end
+		in
+		loop h1;
+		print_endline "---------------------"
+		print_map (h2::tail)
+	end
