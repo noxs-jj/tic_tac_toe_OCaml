@@ -12,12 +12,12 @@
 
 NAME = tic-tac-toc
 
-SOURCES = Case.ml DataSet.ml Map.ml main.ml
+SOURCES = Case.ml DataSet.ml Mmap.ml main.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
 CAMLDEP = ocamldep
-FLAGS = -w da
+FLAGS = -w d
 LIBS = 
 WITHGRAPHICS = graphics.cma -cclib -LGraphics
 

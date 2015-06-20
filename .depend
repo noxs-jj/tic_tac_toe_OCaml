@@ -2,7 +2,7 @@ Case.cmo :
 Case.cmx :
 DataSet.cmo :
 DataSet.cmx :
-Map.cmo : Case.cmo
-Map.cmx : Case.cmx
-main.cmo : Map.cmo DataSet.cmo Case.cmo
-main.cmx : Map.cmx DataSet.cmx Case.cmx
+Mmap.cmo : Case.cmo
+Mmap.cmx : Case.cmx
+main.cmo : Mmap.cmo DataSet.cmo Case.cmo
+main.cmx : Mmap.cmx DataSet.cmx Case.cmx

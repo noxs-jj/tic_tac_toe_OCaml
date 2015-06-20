@@ -26,14 +26,16 @@ let full_cercle case = match case with
 	| (line0, line1, line2, status) -> begin
 		String.set line0 0 '/'; String.set line0 2 '_'; String.set line0 4 '\\';
 		String.set line1 0 '|'; String.set line1 2 ' '; String.set line1 4 '|';
-		String.set line2 0 '\\'; String.set line2 2 '_'; String.set line2 4 '/'
+		String.set line2 0 '\\'; String.set line2 2 '_'; String.set line2 4 '/';
+		print_endline "O win a grid !"
 	end
 
 let full_cross case = match case with
 	| (line0, line1, line2, status) -> begin
 		String.set line0 0 '\\'; String.set line0 2 ' '; String.set line0 4 '/';
 		String.set line1 0 ' '; String.set line1 2 'X'; String.set line1 4 ' ';
-		String.set line2 0 '/'; String.set line2 2 ' '; String.set line2 4 '\\'
+		String.set line2 0 '/'; String.set line2 2 ' '; String.set line2 4 '\\';
+		print_endline "X win a grid !"
 	end
 
 let check_hori case = match case with
@@ -79,6 +81,7 @@ let winnerCase case = match case with
 		| (a, b, c, d) when d = "0" -> print_string ""
 		| (a, b, c, d) when d = "1" -> full_cross case
 		| (a, b, c, d) when d = "2" -> full_cercle case
+		| _ -> print_string ""
 
 let putchar (nbr:int) (case:t) (player:char) =
 	let char_to_case = whatPlayerFromInt player in

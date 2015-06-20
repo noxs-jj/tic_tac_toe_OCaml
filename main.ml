@@ -50,13 +50,13 @@ let winner c = print_endline (c ^ " wins the game!")
 
 let rec run play status playerNbr =
 	let coord = read_loop () in
-	let case = Map.getcase (adj_cood_x (get_x coord)) (adj_cood_y (get_x coord)) play in
+	let case = Mmap.getcase (adj_cood_x (get_x coord)) (adj_cood_y (get_x coord)) play in
 	let ret = Case.putchar ((get_y coord) - 1) case playerNbr in
 	if ret = false then begin print_endline "Illegal move." ; run play status playerNbr end
 	else print_string "";
-	ignore(Map.print_map1 play);
+	ignore(Mmap.print_map1 play);
 	print_char '\n';
-	let is_win = Map.check play in
+	let is_win = Mmap.check play in
 	if is_win = "0" then begin
 		if playerNbr = '1' then begin print_endline "O 's turn to play" ; run play status '2' end
 		else begin print_endline "X 's turn to play" ; run play status '1' end
@@ -65,13 +65,11 @@ let rec run play status playerNbr =
 
 let main () =
 	let play = DataSet.getNewMap () in
-	ignore(Map.print_map1 play);
+	ignore(Mmap.print_map1 play);
 	print_char '\n';
 	print_endline "X 's turn to play";
-	run play true '1';
-	
+	run play true '1'
+
 
 (*****************************************************************************)
 let () = main ()
-
-
