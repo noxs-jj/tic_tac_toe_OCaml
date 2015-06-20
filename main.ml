@@ -30,7 +30,7 @@ let parse ((a, b):z) =
 	else if b < 1 || b > 9 then false
 	else true
 
-let adj_cood_x x =  (x - 1) mod 3
+let adj_cood_x x = (x - 1) mod 3
 
 let adj_cood_y y =
 	if y > 6 then 2
@@ -46,26 +46,30 @@ let rec read_loop () =
 	end
 	else string_to_coord line
 
-let winner c =
-	print_endline (c ^ " wins the game!")
+let winner c = print_endline (c ^ " wins the game!")
 
 let rec run play status playerNbr =
 	let coord = read_loop () in
 	let case = Map.getcase (adj_cood_x (get_x coord)) (adj_cood_y (get_x coord)) play in
 	let ret = Case.putchar ((get_y coord) - 1) case playerNbr in
-	if ret = false then run play status playerNbr;
+	if ret = false then begin print_endline "Illegal move." ; run play status playerNbr end
+	else print_string "";
 	ignore(Map.print_map1 play);
 	print_char '\n';
 	let is_win = Map.check play in
 	if is_win = "0" then begin
-		if playerNbr = '1' then run play status '2'
-		else run play status '1'
+		if playerNbr = '1' then begin print_endline "O 's turn to play" ; run play status '2' end
+		else begin print_endline "X 's turn to play" ; run play status '1' end
 	end
 	else winner is_win
 
 let main () =
 	let play = DataSet.getNewMap () in
-	run play true '1'
+	ignore(Map.print_map1 play);
+	print_char '\n';
+	print_endline "X 's turn to play";
+	run play true '1';
+	
 
 (*****************************************************************************)
 let () = main ()

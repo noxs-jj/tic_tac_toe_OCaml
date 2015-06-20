@@ -61,7 +61,7 @@ let check_diag case = match case with
 
 let check (case:t) = match case with
 	| (line0, line1, line2, status) -> begin
-			if check_hori case != '0' then begin print_endline "ert"; status.[0] <- check_hori case end
+			if check_hori case != '0' then status.[0] <- check_hori case
 			else if check_vert case != '0' then status.[0] <- check_vert case
 			else if check_diag case != '0' then status.[0] <- check_diag case
 			else status.[0] <- '0'
@@ -76,9 +76,9 @@ let line_print (case:t) y = match case with
 	end
 
 let winnerCase case = match case with
-		| (a, b, c, d) when d = "0" -> print_endline "NoWin"
-		| (a, b, c, d) when d = "1" -> print_endline "win1"; full_cross case
-		| (a, b, c, d) when d = "2" -> print_endline "win2"; full_cercle case
+		| (a, b, c, d) when d = "0" -> print_string ""
+		| (a, b, c, d) when d = "1" -> full_cross case
+		| (a, b, c, d) when d = "2" -> full_cercle case
 
 let putchar (nbr:int) (case:t) (player:char) =
 	let char_to_case = whatPlayerFromInt player in
@@ -93,22 +93,31 @@ let putchar (nbr:int) (case:t) (player:char) =
 			| (line0, line1, line2, status) when status <> "0" -> false
 			| (line0, line1, line2, status) -> begin
 				if tabY = 0 then begin
-					String.set line0 (tabX * 2) char_to_case;
-					check case ;
-					winnerCase case;
-					true
+					if line0.[tabX * 2] <> '-' then false
+					else begin
+						String.set line0 (tabX * 2) char_to_case;
+						check case ;
+						winnerCase case;
+						true
+					end
 				end
 				else if tabY = 1 then begin
-					String.set line1 (tabX * 2) char_to_case;
-					check case;
-					winnerCase case;
-					true
+					if line1.[tabX * 2] <> '-' then false
+					else begin
+						String.set line1 (tabX * 2) char_to_case;
+						check case;
+						winnerCase case;
+						true
+					end
 				end
 				else if tabY = 2 then begin
-					String.set line2 (tabX * 2) char_to_case;
-					check case;
-					winnerCase case;
-					true
+					if line2.[tabX * 2] <> '-' then false
+					else begin
+						String.set line2 (tabX * 2) char_to_case;
+						check case;
+						winnerCase case;
+						true
+					end
 				end
 				else invalid_arg "Case::putchar case wrong y"
 			end

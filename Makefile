@@ -17,9 +17,7 @@ SOURCES = Case.ml DataSet.ml Map.ml main.ml
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
 CAMLDEP = ocamldep
-# deprecated
 FLAGS = -w da
-
 LIBS = 
 WITHGRAPHICS = graphics.cma -cclib -LGraphics
 
