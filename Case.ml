@@ -38,24 +38,24 @@ let full_cross case = match case with
 
 let check_hori case = match case with
 	| (line0, line1, line2, status) -> begin
-		if (line0.[0] = line0.[2]) && (line0.[0] = line0.[4]) then whatPlayerFromChar line0.[0]
-		else if (line1.[0] = line1.[2]) && (line1.[0] = line1.[4]) then whatPlayerFromChar line1.[0]
-		else if (line2.[0] = line2.[2]) && (line2.[0] = line2.[4]) then whatPlayerFromChar line2.[0]
+		if (line0.[0] = line0.[2]) && (line0.[0] = line0.[4]) && (line0.[0] <> '-') then whatPlayerFromChar line0.[0]
+		else if (line1.[0] = line1.[2]) && (line1.[0] = line1.[4]) && (line1.[0] <> '-') then whatPlayerFromChar line1.[0]
+		else if (line2.[0] = line2.[2]) && (line2.[0] = line2.[4]) && (line2.[0] <> '-') then whatPlayerFromChar line2.[0]
 		else '0'
 	end
 
 let check_vert case = match case with
 	| (line0, line1, line2, status) -> begin
-		if (line0.[0] = line1.[0]) && (line0.[0] = line2.[0]) then whatPlayerFromChar line0.[0]
-		else if (line0.[2] = line1.[2]) && (line0.[2] = line2.[2]) then whatPlayerFromChar line0.[2]
-		else if (line0.[4] = line1.[4]) && (line0.[4] = line2.[4]) then whatPlayerFromChar line0.[4]
+		if (line0.[0] = line1.[0]) && (line0.[0] = line2.[0]) && (line0.[0] <> '-') then whatPlayerFromChar line0.[0]
+		else if (line0.[2] = line1.[2]) && (line0.[2] = line2.[2]) && (line0.[2] <> '-') then whatPlayerFromChar line0.[2]
+		else if (line0.[4] = line1.[4]) && (line0.[4] = line2.[4]) && (line0.[4] <> '-') then whatPlayerFromChar line0.[4]
 		else '0'
 	end
 
 let check_diag case = match case with
 	| (line0, line1, line2, status) -> begin
-		if (line0.[0] = line1.[2]) && (line0.[0] = line2.[4]) then whatPlayerFromChar line0.[0]
-		else if (line2.[0] = line1.[2]) && (line2.[0] = line0.[4]) then whatPlayerFromChar line2.[0]
+		if (line0.[0] = line1.[2]) && (line0.[0] = line2.[4]) && (line0.[0] <> '-') then whatPlayerFromChar line0.[0]
+		else if (line2.[0] = line1.[2]) && (line2.[0] = line0.[4]) && (line2.[0] <> '-') then whatPlayerFromChar line2.[0]
 		else '0'
 	end
 
@@ -94,14 +94,20 @@ let putchar (nbr:int) (case:t) (player:char) =
 				if tabY = 0 then begin
 					String.set line0 (tabX * 2) char_to_case;
 					check case ;
-					winnerCase case end
+					winnerCase case;
+					true
+				end
 				else if tabY = 1 then begin
 					String.set line1 (tabX * 2) char_to_case;
 					check case;
-					winnerCase case end
+					winnerCase case;
+					true
+				end
 				else if tabY = 2 then begin
 					String.set line2 (tabX * 2) char_to_case;
 					check case;
-					winnerCase case end
+					winnerCase case;
+					true
+				end
 				else invalid_arg "Case::putchar case wrong y"
 			end
