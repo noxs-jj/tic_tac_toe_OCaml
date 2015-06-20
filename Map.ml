@@ -14,7 +14,10 @@
 type t_line = [Case.t]
 type t_map = [t_line]
 *)
-
+(* 
+1 -> 0 0
+2 -> 0 1
+3 -> 0 2 *)
 (* val getcase : int -> int -> 'a list list -> 'a *)
 let rec getcase (x:int) (y:int) map = match map with
 	| [] -> invalid_arg "Error y (getcase)"
@@ -69,7 +72,7 @@ let rec print_map1 map = match map with
 			| e1::tail ->
 			begin
 			 	Case.line_print e1 line;
-			 	print_string " |";
+			 	print_string " |  ";
 			 	loop tail line
 			 end
 		in
@@ -87,7 +90,7 @@ let rec print_map1 map = match map with
 			| e1::tail ->
 			begin
 			 	Case.line_print e1 line;
-			 	print_string " |";
+			 	print_string " |  ";
 			 	loop tail line
 			 end
 		in
@@ -97,6 +100,6 @@ let rec print_map1 map = match map with
 		print_char '\n';
 		loop h1 2;
 		print_char '\n';
-		print_endline "-----------------------";
+		print_endline "-------------------------";
 		print_map1 tail
 	end

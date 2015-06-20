@@ -22,16 +22,40 @@ let whatPlayerFromChar charCheck =
 	else if charCheck = 'O' then '2'
 	else '0'
 
-let putchar (x:int) (y:int) (case:t) (player:char) = 
+(*
+	1 2 3
+	4 5 6
+	7 8 9
+*)
+
+let putchar (nbr:int) (case:t) (player:char) =
+	let char_to_case = whatPlayerFromInt player in
+	let tabY = begin
+		if nbr > 5 then 2
+		else if nbr > 2 then 1
+		else 0
+	end
+	in
+	let tabX = (nbr mod 3) in 
+	match case with
+		| (line0, line1, line2, status) -> begin
+			if tabY = 0 then begin String.set line0 (tabX * 2) char_to_case end
+			else if tabY = 1 then begin String.set line1 (tabX * 2) char_to_case end
+			else if tabY = 2 then begin String.set line2 (tabX * 2) char_to_case end
+			else invalid_arg "Case::putchar case wrong y"
+		end
+
+
+(* let putchar (x:int) (y:int) (case:t) (player:char) = 
 	let char_to_case = whatPlayerFromInt player in
 	match case with
 		| (line0, line1, line2, status) ->
 		begin
-			if y = 0 then begin print_endline " hello "; String.set line0 (x * 2 + 1) char_to_case end
-			else if y = 1 then begin print_endline " hello11 " ;String.set line1 (x * 2 + 1) char_to_case end
-			else if y = 2 then begin print_endline " hello22 " ;String.set line2 (x * 2 + 1) char_to_case end
+			if y = 0 then begin String.set line0 (x * 2 + 1) char_to_case end
+			else if y = 1 then begin String.set line1 (x * 2 + 1) char_to_case end
+			else if y = 2 then begin String.set line2 (x * 2 + 1) char_to_case end
 			else invalid_arg "Case::putchar case wrong y"
-		end
+		end *)
 
 let full_cercle case = match case with
 	| (line0, line1, line2, status) -> begin

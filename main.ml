@@ -1,4 +1,4 @@
-(*****************************************************************************)
+(****************************************************************************)
 (*                                                                           *)
 (*   Vincent Jacquier                                     :::      ::::::::  *)
 (*   Jean-Jacques MOIROUX                               :+:      :+:    :+:  *)
@@ -11,7 +11,7 @@
 (*****************************************************************************)
 
 type z = int * int
-type t = string * string * string * string
+type t = string * string * string * string (* why ? *)
 
 let get_x ((a, b):z) = a
 let get_y ((a, b):z) = b
@@ -26,26 +26,30 @@ let string_to_coord data =
 	else (((int_of_char(data.[0])) - 48), ((int_of_char(data.[2])) - 48))
 
 let parse ((a, b):z) =
-	if a < 0 || a > 8 then false
-	else if b < 0 || b > 8 then false
+	if a < 1 || a > 9 then false
+	else if b < 1 || b > 9 then false
 	else true
+
+let adj_cood_x x =  (x - 1) mod 3
+
+let adj_cood_y y =
+	if y > 6 then 2
+	else if y > 3 then 1
+	else 0
 
 let rec read_loop () =
 	let line = read_line () in
 	let test = string_to_coord line in
-(* 	print_int (get_x test);
-	print_char '\n';
-	print_int (get_y test);
-	print_char '\n'; *)
-	if parse test = false then read_loop ()
+	if parse test = false then begin
+		print_endline "Incorrect format.";
+		read_loop ()
+	end
 	else string_to_coord line
-	(* if (parse (string_to_coord line)) = false then read_loop
-	else string_to_coord line *)
 
 let run play status =
 	let coord = read_loop () in
-	let case = Map.getcase ((get_x coord) / 3) ((get_y coord) / 3) play in
-	Case.putchar ((get_x coord) mod 3) ((get_y coord) mod 3) case '1';
+	let case = Map.getcase (adj_cood_x (get_x coord)) (adj_cood_y (get_x coord)) play in
+	Case.putchar ((get_y coord) - 1) case '1';
 	ignore(Map.print_map1 play);
 	print_char '\n'
 	(* if status = true then run play status;  *)
@@ -62,11 +66,3 @@ let main () =
 let () = main ()
 
 
-
-(*
-
-1 2 3
-4 5 6
-7 8 9
-
-*)
