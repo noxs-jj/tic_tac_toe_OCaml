@@ -90,6 +90,7 @@ let putchar (nbr:int) (case:t) (player:char) =
 	in
 	let tabX = (nbr mod 3) in 
 		match case with
+			| (line0, line1, line2, status) when status <> "0" -> false
 			| (line0, line1, line2, status) -> begin
 				if tabY = 0 then begin
 					String.set line0 (tabX * 2) char_to_case;
