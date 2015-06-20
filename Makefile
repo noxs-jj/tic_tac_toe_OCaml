@@ -12,7 +12,7 @@
 
 NAME = tic-tac-toc
 
-SOURCES = Case.ml Map.ml main.ml
+SOURCES = Case.ml DataSet.ml Map.ml main.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt

@@ -12,8 +12,10 @@
 
 (* 
 type t_line = [Case.t]
-type t_map = [t_line] *)
+type t_map = [t_line]
+*)
 
+(* val getcase : int -> int -> 'a list list -> 'a *)
 let rec getcase (x:int) (y:int) map = match map with
 	| [] -> invalid_arg "Error y (getcase)"
 	| h1::tail -> begin
@@ -30,10 +32,6 @@ let rec getcase (x:int) (y:int) map = match map with
 			loop1 x h1
 		end
 	end
-
-let createMap = 
-	let lst = [Case.newCase ; Case.newCase ; Case.newCase] in
-	[lst ; lst ; lst]
 
 let get_Case_status (a, b, c, d) = d
 

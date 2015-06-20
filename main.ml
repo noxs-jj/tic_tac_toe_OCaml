@@ -11,6 +11,7 @@
 (*****************************************************************************)
 
 type z = int * int
+type t = string * string * string * string
 
 let get_x ((a, b):z) = a
 let get_y ((a, b):z) = b
@@ -52,10 +53,20 @@ let run play status =
 
 
 let main () =
-	let play = Map.createMap in
+	let play = DataSet.getNewMap () in
 (* 	ignore(Map.print_map1 play);
 	print_char '\n'; *)
 	run play true
 
 (*****************************************************************************)
 let () = main ()
+
+
+
+(*
+
+1 2 3
+4 5 6
+7 8 9
+
+*)

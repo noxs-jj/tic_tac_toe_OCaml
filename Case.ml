@@ -12,8 +12,6 @@
 
 type t = string * string * string * string
 
-let newCase = (" - - -", " - - -", " - - -", "0")
-
 let whatPlayerFromInt player =
 	if player = '1' then 'X'
 	else if player = '2' then 'O'
