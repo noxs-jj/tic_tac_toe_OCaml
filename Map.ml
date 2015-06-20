@@ -1,14 +1,14 @@
-(********************************************************************************)
-(*                                                                              *)
-(*    Vincent Jacquier                                     :::      ::::::::    *)
-(*    Jean-Jacques MOIROUX                               :+:      :+:    :+:    *)
-(*                                                     +:+ +:+         +:+      *)
-(*    By: vjacquie <vjacquie@student.42.fr>          +#+  +:+       +#+         *)
-(*    By: jmoiroux <jjmoiroux@gmail.com>           +#+#+#+#+#+   +#+            *)
-(*                                                      #+#    #+#              *)
-(*    Created: 2015/18/15 by vjacquie jmoiroux         ###   ########.fr        *)
-(*                                                                              *)
-(********************************************************************************)
+(*****************************************************************************)
+(*                                                                           *)
+(*   Vincent Jacquier                                     :::      ::::::::  *)
+(*   Jean-Jacques MOIROUX                               :+:      :+:    :+:  *)
+(*                                                    +:+ +:+         +:+    *)
+(*   By: vjacquie <vjacquie@student.42.fr>          +#+  +:+       +#+       *)
+(*   By: jmoiroux <jjmoiroux@gmail.com>           +#+#+#+#+#+   +#+          *)
+(*                                                     #+#    #+#            *)
+(*   Created: 2015/18/15 by vjacquie jmoiroux         ###   ########.fr      *)
+(*                                                                           *)
+(*****************************************************************************)
 
 (* 
 type t_line = [Case.t]
@@ -34,17 +34,6 @@ let rec getcase (x:int) (y:int) map = match map with
 let createMap = 
 	let lst = [Case.newCase ; Case.newCase ; Case.newCase] in
 	[lst ; lst ; lst]
-
-(* let rec init map = match map with
-	| [] -> print_string ""
-	| h1::tail -> begin
-		let rec loop elem = match elem with
-			| [] -> print_string ""
-			| e1::tail -> Case.init e1; loop tail
-		in
-		loop h1;
-		init tail
-	end *)
 
 let get_Case_status (a, b, c, d) = d
 
@@ -113,5 +102,3 @@ let rec print_map1 map = match map with
 		print_endline "-----------------------";
 		print_map1 tail
 	end
-
-

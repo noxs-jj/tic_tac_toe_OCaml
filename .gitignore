@@ -1,0 +1,7 @@
+rush00.en.pdf
+*.o
+*.cmi
+*.cmx
+*.cmo
+a.out
+tic-tac-toc*
