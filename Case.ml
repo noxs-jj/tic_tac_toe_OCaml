@@ -46,6 +46,24 @@ let check_hori case = match case with
 		else '0'
 	end
 
+let checkDraw ((line0, line1, line2, d):t) =
+	let rec loop iter =
+		if iter = 9 then true
+		else begin
+			let tabY = 
+				if iter > 5 then 2
+				else if iter > 2 then 1
+				else 0
+			in
+			let tabX = (iter mod 3) in
+			if tabY = 0 && line0.[tabX * 2] = '-' then false
+			else if tabY = 1 && line1.[tabX * 2] = '-' then false
+			else if tabY = 2 && line2.[tabX * 2] = '-' then false
+			else loop (iter + 1)
+		end
+	in 
+	loop 0
+
 let check_vert case = match case with
 	| (line0, line1, line2, status) -> begin
 		if (line0.[0] = line1.[0]) && (line0.[0] = line2.[0]) && (line0.[0] <> '-') then whatPlayerFromChar line0.[0]
@@ -61,11 +79,12 @@ let check_diag case = match case with
 		else '0'
 	end
 
-let check (case:t) = match case with
+let check (case:t) player = match case with
 	| (line0, line1, line2, status) -> begin
-			if check_hori case != '0' then status.[0] <- check_hori case
-			else if check_vert case != '0' then status.[0] <- check_vert case
-			else if check_diag case != '0' then status.[0] <- check_diag case
+			if check_hori case <> '0' then status.[0] <- check_hori case
+			else if check_vert case <> '0' then status.[0] <- check_vert case
+			else if check_diag case <> '0' then status.[0] <- check_diag case
+			else if checkDraw case = true then status.[0] <- player
 			else status.[0] <- '0'
 	end
 
@@ -83,6 +102,10 @@ let winnerCase case = match case with
 		| (a, b, c, d) when d = "2" -> full_cercle case
 		| _ -> print_string ""
 
+
+
+			
+
 let putchar (nbr:int) (case:t) (player:char) =
 	let char_to_case = whatPlayerFromInt player in
 	let tabY = begin
@@ -99,7 +122,7 @@ let putchar (nbr:int) (case:t) (player:char) =
 					if line0.[tabX * 2] <> '-' then false
 					else begin
 						String.set line0 (tabX * 2) char_to_case;
-						check case ;
+						check case player;
 						winnerCase case;
 						true
 					end
@@ -108,7 +131,7 @@ let putchar (nbr:int) (case:t) (player:char) =
 					if line1.[tabX * 2] <> '-' then false
 					else begin
 						String.set line1 (tabX * 2) char_to_case;
-						check case;
+						check case player;
 						winnerCase case;
 						true
 					end
@@ -117,7 +140,7 @@ let putchar (nbr:int) (case:t) (player:char) =
 					if line2.[tabX * 2] <> '-' then false
 					else begin
 						String.set line2 (tabX * 2) char_to_case;
-						check case;
+						check case player;
 						winnerCase case;
 						true
 					end
