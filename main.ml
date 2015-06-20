@@ -46,20 +46,21 @@ let rec read_loop () =
 	end
 	else string_to_coord line
 
-let run play status =
+let winner c =
+	print_endline (c ^ " wins the game!")
+
+let rec run play status =
 	let coord = read_loop () in
 	let case = Map.getcase (adj_cood_x (get_x coord)) (adj_cood_y (get_x coord)) play in
 	Case.putchar ((get_y coord) - 1) case '1';
 	ignore(Map.print_map1 play);
-	print_char '\n'
-	(* if status = true then run play status;  *)
-
-
+	print_char '\n';
+	let is_win = Map.check play in
+	if is_win = "0" then run play status
+	else winner is_win
 
 let main () =
 	let play = DataSet.getNewMap () in
-(* 	ignore(Map.print_map1 play);
-	print_char '\n'; *)
 	run play true
 
 (*****************************************************************************)
